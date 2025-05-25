@@ -1,5 +1,27 @@
 ---
 title: "ENVS-193DS_HW3"
+name: Max Tu
+date: 5/28/25
 format: html
 ---
 
+```{r}
+library(tidyverse)
+library(here)
+library(gt)
+library(flextable)
+library(janitor)
+library(readxl)
+library(magick)
+```
+
+# 3. Statistical Critique
+
+## a. 
+
+[The authors use ANOVA and a Mann-Whitney U test. The main research question is whether differential habitat use provided significant separation between the two panda species.]
+
+```{r}
+img <- image_read("data_image.jpg")  # reads image in
+print(img) # shows the image
+```
