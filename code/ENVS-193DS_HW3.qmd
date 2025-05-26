@@ -25,3 +25,7 @@ library(magick)
 img <- image_read("data_image.jpg")  # reads image in
 print(img) # shows the image
 ```
+
+## b. 
+
+[The table does a great job to show ANOVA (tells us how much the means of the two groups differ relative to the variation within the group) for the habitat variables, by showing which habitat variables have a statistical difference between the two species (via F-statistic and p-value). It also lists out the Mann-Whitney U-statistic (ranks data and compares distributions between the two groups) and p-value, which indicates which habitat variables have a significant difference between two species. ]
