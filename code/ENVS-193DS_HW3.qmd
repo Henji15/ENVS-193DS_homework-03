@@ -28,4 +28,8 @@ print(img) # shows the image
 
 ## b. 
 
-[The table does a great job to show ANOVA (tells us how much the means of the two groups differ relative to the variation within the group) for the habitat variables, by showing which habitat variables have a statistical difference between the two species (via F-statistic and p-value). It also lists out the Mann-Whitney U-statistic (ranks data and compares distributions between the two groups) and p-value, which indicates which habitat variables have a significant difference between two species. ]
+[The table does a great job to show ANOVA (tells us how much the means of the two groups differ relative to the variation within the group) for the habitat variables, by showing which habitat variables have a statistical difference between the two species (via F-statistic and p-value). It also lists out the Mann-Whitney U-statistic (ranks data and compares distributions between the two groups) and p-value, which indicates which habitat variables have a significant difference between two species.]
+
+## c. 
+
+[For this table, the authors use italics for the F statistic for ANOVA and U statistic for Mann-U Whitney as well as for the p-values. By doing italics, it draws the readers' attention to these values.]
