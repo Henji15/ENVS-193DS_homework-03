@@ -15,6 +15,12 @@ library(readxl)
 library(magick)
 ```
 
+# 1. Personal data
+
+## a. 
+
+[I would be comparing my steps between long and short days as well as comparing my steps with the other variables I chose (extracurriculars, office hours...). The groups that I am comparing are informative, because I believe I take more steps on longer days as I have more classes or extracurricular on campus.]
+
 # 3. Statistical Critique
 
 ## a. 
