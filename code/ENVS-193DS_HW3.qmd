@@ -21,6 +21,51 @@ library(magick)
 
 [I would be comparing my steps between long and short days as well as comparing my steps with the other variables I chose (extracurriculars, office hours...). The groups that I am comparing are informative, because I believe I take more steps on longer days as I have more classes or extracurricular on campus.]
 
+## b.
+
+```{r}
+plot_data <- long_day |>
+  select(steps, long_day, extracurricular, 'office hours', 'go to food bank') |>
+  pivot_longer(
+    cols = -steps,
+    names_to = "category",
+    values_to = "yes_no"
+  )
+
+# Plot with facets for each category
+ggplot(plot_data, aes(x = yes_no, y = steps, fill = yes_no)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(
+    aes(color = yes_no),
+    width = 0.2, height = 0, size = 1.5, color = "black", show.legend = FALSE
+  ) +
+  facet_wrap(~ category, scales = "free_x") +
+  labs(
+    title = "Steps by Different Categorical Variables",
+    x = "Yes / No",
+    y = "Steps"
+  ) +
+  scale_fill_manual(values = c("yes" = "#009996", "no" = "#FF00CC")) +
+  scale_color_manual(values = c("yes" = "#009996", "no" = "#FF00CC")) +
+  theme_minimal()
+
+```
+
+```{r}
+screen_time <- data 
+screen_time <- screen_time |>
+    rename(screen_time_value = `screen time`) |>
+  mutate(screen_time_value = as.numeric(screen_time_value))
+ggplot(screen_time, aes(x = screen_time_value, y = steps)) +
+  geom_point(alpha = 0.6, color = "darkgreen", size = 2) +
+  labs(
+    title = "Screen Time vs Steps",
+    x = "Screen Time (hrs)",
+    y = "Steps"
+  ) +
+  theme_minimal()
+```
+
 # 3. Statistical Critique
 
 ## a. 
@@ -32,7 +77,7 @@ img <- image_read("data_image.jpg")  # reads image in
 print(img) # shows the image
 ```
 
-## b. 
+## b.
 
 [The table does a great job to show ANOVA (tells us how much the means of the two groups differ relative to the variation within the group) for the habitat variables, by showing which habitat variables have a statistical difference between the two species (via F-statistic and p-value). It also lists out the Mann-Whitney U-statistic (ranks data and compares distributions between the two groups) and p-value, which indicates which habitat variables have a significant difference between two species.]
 
