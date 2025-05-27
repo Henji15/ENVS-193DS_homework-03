@@ -24,6 +24,9 @@ library(magick)
 ## b.
 
 ```{r}
+data <-  read_csv("C:/Users/tuthi/OneDrive/Documents/github/ENVS-193DS_homework-03/data/data_collection.csv")
+long_day <- data 
+colnames(long_day)[colnames(long_day) == "long day? (Tues, Thurs)"] <- "long_day"
 plot_data <- long_day |>
   select(steps, long_day, extracurricular, 'office hours', 'go to food bank') |>
   pivot_longer(
@@ -43,7 +46,8 @@ ggplot(plot_data, aes(x = yes_no, y = steps, fill = yes_no)) +
   labs(
     title = "Steps by Different Categorical Variables",
     x = "Yes / No",
-    y = "Steps"
+    y = "Steps",
+    fill = "Yes or No" 
   ) +
   scale_fill_manual(values = c("yes" = "#009996", "no" = "#FF00CC")) +
   scale_color_manual(values = c("yes" = "#009996", "no" = "#FF00CC")) +
@@ -101,8 +105,7 @@ summary_table |>
 [The authors use ANOVA and a Mann-Whitney U test. The main research question is whether differential habitat use provided significant separation between the two panda species.]
 
 ```{r}
-img <- image_read("data_image.jpg")  # reads image in
-print(img) # shows the image
+knitr::include_graphics("data_image.jpg")
 ```
 
 ## b.
