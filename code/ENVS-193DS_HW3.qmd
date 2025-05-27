@@ -71,6 +71,29 @@ ggplot(screen_time, aes(x = screen_time_value, y = steps)) +
 [The first figure displays the jitterplots for the four categorical data (extracurricular, go to food bank, long_day, office hours). For each categorical data, the yes or no indicates whether that category was available that day. The second figure shows the screen time on the x-axis and steps on the y-axis, with each point being a day.]
 
 ## d. 
+
+```{r}
+summary_table <- long_day |>
+  select(steps, long_day, extracurricular, 'office hours', 'go to food bank') |>
+  pivot_longer(
+    cols = -steps,
+    names_to = "category",
+    values_to = "group"
+  ) |>
+  group_by(category, group) |>
+  summarise(mean_steps = round(mean(steps, na.rm = TRUE), 1), .groups = "drop")
+
+summary_table |> 
+  gt() |>
+  tab_header(
+    title = "Mean Steps by Categorical Variable"
+  ) |>
+  cols_label(
+    category = "Category",
+    group = "Group (Yes/No)",
+    mean_steps = "Mean Steps"
+  )
+```
 # 3. Statistical Critique
 
 ## a. 
