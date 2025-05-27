@@ -66,6 +66,11 @@ ggplot(screen_time, aes(x = screen_time_value, y = steps)) +
   theme_minimal()
 ```
 
+## c.
+
+[The first figure displays the jitterplots for the four categorical data (extracurricular, go to food bank, long_day, office hours). For each categorical data, the yes or no indicates whether that category was available that day. The second figure shows the screen time on the x-axis and steps on the y-axis, with each point being a day.]
+
+## d. 
 # 3. Statistical Critique
 
 ## a. 
