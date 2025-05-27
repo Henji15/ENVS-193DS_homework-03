@@ -33,3 +33,7 @@ print(img) # shows the image
 ## c. 
 
 [For this table, the authors use italics for the F statistic for ANOVA and U statistic for Mann-U Whitney as well as for the p-values. By doing italics, it draws the readers' attention to these values.]
+
+## d.
+
+[A suggestion that I would have is for the authors is to break the table up to ANOVA and Mann-Whitney U-Test. I would suggest this because there's a lot of data in this current table, which would make it hard to look at. Another suggestion I would have is to organize the habitat variables that are significantly different between the two panda species and the ones that are not when you have broken up ANOVA and Mann-Whitney U-Test. The authors can list the habitat variables that were significantly different first, then list the rest of the habitat variables that were not significantly different. This just helps make the data less intimidating and make the data look more organized. The final table would break up into 2 tables, with ANOVA in one and Mann-Whitney U Test in another. The habitat variables with a significant difference between the two species would be listed first, then followed by the habitat variables with no significant difference between the two species would be listed second.]
