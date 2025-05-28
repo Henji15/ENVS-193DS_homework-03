@@ -118,6 +118,10 @@ knitr::include_graphics("data_visualization.jpeg")
 knitr::include_graphics("data_visualization_draft.jpg")
 ```
 
+## d.
+
+[The content of my piece shows my steps for each school day (for just two weeks), along with icons for my categorical data attached to each point. I have my screen time on the inverse of the axis to compare, and I also drew icons that compared my steps on long and short days and days where I had extracurricular or not. I was inspired by the icons created from Georgia and Stephanie's letter exchange. The form of the work using pencil to sketch out the diagram, with highlighters to fill in the color for the icons. The process of my work started with sketching the axis lines with pencil and spacing the tick marks evenly. I then added each point in while adding the necessary icons for each day.]
+
 # 3. Statistical Critique
 
 ## a. 
