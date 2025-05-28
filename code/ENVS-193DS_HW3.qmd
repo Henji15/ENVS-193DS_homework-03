@@ -3,6 +3,8 @@ title: "ENVS-193DS_HW3"
 name: Max Tu
 date: 5/28/25
 format: html
+message: false # use this to make sure messages don't show up
+  warning: false # use this to make sure warnings don't show up
 ---
 
 ```{r}
@@ -98,6 +100,15 @@ summary_table |>
     mean_steps = "Mean Steps"
   )
 ```
+# 2. Affective Visualization
+
+## a. 
+
+[My affective visualization could look like Georgia and Stephanie's data visualization project, where the different categorical data can look like different symbols. I'm thinking of having each day's steps being a point anchored by the different categorical variables that were available on those days. Then I could show my screen time on an inverted axis from steps to compare that way. This is a preliminary idea that would likely change.]
+
+## b. 
+
+
 # 3. Statistical Critique
 
 ## a. 
