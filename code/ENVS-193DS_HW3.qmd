@@ -108,6 +108,9 @@ summary_table |>
 
 ## b. 
 
+```{r}
+knitr::include_graphics("data_visualization.jpeg")
+```
 
 # 3. Statistical Critique
 
