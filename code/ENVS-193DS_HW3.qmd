@@ -1,14 +1,15 @@
 ---
 title: "ENVS-193DS_HW3"
-name: Max Tu
+author: "Max Tu"
 date: 5/28/25
 format: html
+toc: true
 message: false # use this to make sure messages don't show up
-  warning: false # use this to make sure warnings don't show up
+warning: false # use this to make sure warnings don't show up
 ---
 
 ```{r}
-library(tidyverse)
+library(tidyverse) # read in packages
 library(here)
 library(gt)
 library(flextable)
@@ -19,127 +20,130 @@ library(magick)
 
 # 1. Personal data
 
-## a. 
+## a. Data summarizing
 
-[I would be comparing my steps between long and short days as well as comparing my steps with the other variables I chose (extracurriculars, office hours...). The groups that I am comparing are informative, because I believe I take more steps on longer days as I have more classes or extracurricular on campus.]
+[I would be comparing my steps between long and short days as well as comparing my steps with the other variables I chose (extracurriculars, office hours...), likely comparing the medians, Q1, and Q3s. The groups that I am comparing are informative, because I believe I take more steps on longer days as I might have more time for office hours or extracurricular on campus.]
 
-## b.
+## b. Visualization 
 
 ```{r}
-data <-  read_csv("C:/Users/tuthi/OneDrive/Documents/github/ENVS-193DS_homework-03/data/data_collection.csv")
-long_day <- data 
-colnames(long_day)[colnames(long_day) == "long day? (Tues, Thurs)"] <- "long_day"
-plot_data <- long_day |>
-  select(steps, long_day, extracurricular, 'office hours', 'go to food bank') |>
-  pivot_longer(
-    cols = -steps,
-    names_to = "category",
-    values_to = "yes_no"
+data <-  read_csv("C:/Users/tuthi/OneDrive/Documents/github/ENVS-193DS_homework-03/data/data_collection.csv") # Read the CSV file into a data frame called 'data'
+long_day <- data # Create a new variable 'long_day' that copies the original data
+colnames(long_day)[colnames(long_day) == "long day? (Tues, Thurs)"] <- "long_day" # Rename the column "long day? (Tues, Thurs)" to simply "long_day" for easier access
+plot_data <- long_day |> # Create a new data frame 'plot_data' for plotting
+  select(steps, long_day, extracurricular, 'office hours', 'go to food bank') |>  # Select relevant columns: 'steps' and categorical variables
+  pivot_longer(  # Reshape the data from wide to long format
+    cols = -steps, # All columns except 'steps' will be pivoted
+    names_to = "category", # Store original column names in a new column called 'category'
+    values_to = "yes_no"  # Store corresponding yes/no values in a new column called 'yes_no'
   )
 
-# Plot with facets for each category
-ggplot(plot_data, aes(x = yes_no, y = steps, fill = yes_no)) +
-  geom_boxplot(outlier.shape = NA) +
-  geom_jitter(
-    aes(color = yes_no),
-    width = 0.2, height = 0, size = 1.5, color = "black", show.legend = FALSE
+ggplot(plot_data, aes(x = yes_no, y = steps, fill = yes_no)) + # Add a boxplot for each category with fill color based on yes/no
+  geom_boxplot(outlier.shape = NA) +  # Hide outlier points to reduce clutter
+  geom_jitter( # Add jittered points (individual data points) for visibility
+    aes(color = yes_no), # Color points based on yes/no
+    width = 0.2,  # Spread points horizontally
+    height = 0, # No vertical jitter
+    size = 1.5, # Point size
+    color = "black", # Override color to black for consistency
+    show.legend = FALSE # Don't show legend for jitter points
   ) +
-  facet_wrap(~ category, scales = "free_x") +
-  labs(
-    title = "Steps by Different Categorical Variables",
-    x = "Yes / No",
-    y = "Steps",
-    fill = "Yes or No" 
+  facet_wrap(~ category, scales = "free_x") + # Create a separate subplot (facet) for each category
+  labs(  # Add plot and axis labels
+    title = "Steps by Different Categorical Variables", # Plot title
+    x = "Yes / No", # X-axis label
+    y = "Steps", # Y-axis label
+    fill = "Yes or No" # Legend title for fill
   ) +
-  scale_fill_manual(values = c("yes" = "#009996", "no" = "#FF00CC")) +
-  scale_color_manual(values = c("yes" = "#009996", "no" = "#FF00CC")) +
-  theme_minimal()
+  scale_fill_manual(values = c("yes" = "#009996", "no" = "#FF00CC")) + # Manually set fill colors for 'yes' and 'no' values
+  scale_color_manual(values = c("yes" = "#009996", "no" = "#FF00CC")) + # Manually set outline colors (used by jitter) for 'yes' and 'no' values
+  theme_minimal() # Use a minimal theme for a clean look
 
 ```
 
 ```{r}
-screen_time <- data 
-screen_time <- screen_time |>
-    rename(screen_time_value = `screen time`) |>
-  mutate(screen_time_value = as.numeric(screen_time_value))
-ggplot(screen_time, aes(x = screen_time_value, y = steps)) +
-  geom_point(alpha = 0.6, color = "darkgreen", size = 2) +
+screen_time <- data # Assign the data frame to a new variable called 'screen_time'
+screen_time <- screen_time |> # Clean and prepare the screen_time dataset
+    rename(screen_time_value = `screen time`) |> # Rename 'screen time' column to 'screen_time_value' for easier use
+  mutate(screen_time_value = as.numeric(screen_time_value)) # Convert screen time values to numeric (in case they're character/factor)
+ggplot(screen_time, aes(x = screen_time_value, y = steps)) + # Create a scatter plot of screen time vs steps
+  geom_point(alpha = 0.6, color = "darkgreen", size = 2) + # Plot each point with some transparency and dark green color
   labs(
-    title = "Screen Time vs Steps",
-    x = "Screen Time (hrs)",
-    y = "Steps"
+    title = "Screen Time vs Steps",  # Set the plot title
+    x = "Screen Time (hrs)", # X-axis label
+    y = "Steps"  # Y-axis label
   ) +
-  theme_minimal()
+  theme_minimal() # Apply a clean, minimal theme
 ```
 
-## c.
+## c. Captionh
 
-[The first figure displays the jitterplots for the four categorical data (extracurricular, go to food bank, long_day, office hours). For each categorical data, the yes or no indicates whether that category was available that day. The second figure shows the screen time on the x-axis and steps on the y-axis, with each point being a day.]
+[The first figure displays the jitterplots for the four categorical data (extracurricular, go to food bank, long_day, office hours). The jitterplots displays Q1, median, Q3 for steps in the jitterplots. For each categorical data, the yes or no indicates whether that category was available that day. The second figure shows the screen time on the x-axis and steps on the y-axis, with each point being a day.]
 
-## d. 
+## d. Table presentation
 
 ```{r}
-summary_table <- long_day |>
-  select(steps, long_day, extracurricular, 'office hours', 'go to food bank') |>
-  pivot_longer(
-    cols = -steps,
-    names_to = "category",
-    values_to = "group"
+summary_table <- long_day |> # Create a summary table from the 'long_day' dataset
+  select(steps, long_day, extracurricular, 'office hours', 'go to food bank') |> # Select relevant columns: 'steps' and several categorical variables
+  pivot_longer( # Convert the dataset from wide to long format
+    cols = -steps,  # Keep 'steps' column unchanged; transform all others
+    names_to = "category",  # New column to hold the variable names
+    values_to = "group"  # New column to hold the values (e.g., Yes/No)
   ) |>
-  group_by(category, group) |>
-  summarise(mean_steps = round(mean(steps, na.rm = TRUE), 1), .groups = "drop")
+  group_by(category, group) |> # Group by category and group (e.g., 'extracurricular' and 'Yes')
+  summarise(mean_steps = round(mean(steps, na.rm = TRUE), 1), .groups = "drop")  # Calculate the mean number of steps for each group, rounded to 1 decimal
 
-summary_table |> 
-  gt() |>
+summary_table |> # Format the summary table using the gt package
+  gt() |>  # Create a gt table
   tab_header(
-    title = "Mean Steps by Categorical Variable"
+    title = "Mean Steps by Categorical Variable" # Set the title of the table
   ) |>
   cols_label(
-    category = "Category",
-    group = "Group (Yes/No)",
-    mean_steps = "Mean Steps"
+    category = "Category", # Rename column 'category' to 'Category'
+    group = "Group (Yes/No)", # Rename column 'group' to 'Group (Yes/No)'
+    mean_steps = "Mean Steps" # Rename column 'mean_steps' to 'Mean Steps'
   )
 ```
 # 2. Affective Visualization
 
-## a. 
+## a. Describe in words what an affective visualization could look like for your personal data (3-5 sentences)
 
-[My affective visualization could look like Georgia and Stephanie's data visualization project, where the different categorical data can look like different symbols. I'm thinking of having each day's steps being a point anchored by the different categorical variables that were available on those days. Then I could show my screen time on an inverted axis from steps to compare that way. This is a preliminary idea that would likely change.]
+[My affective visualization could look like Georgia and Stephanie's data visualization project, where the different categorical data can look like different symbols. I'm thinking of having each day's steps being a point anchored by the different categorical variables that were available on those days (represented by different icons). Then I could show my screen time on an inverted axis from steps to compare that way. This is a preliminary idea that would likely change.]
 
-## b. 
-
-```{r}
-knitr::include_graphics("data_visualization.jpeg")
-```
-
-## c. 
+## b.  Create a sketch (on paper) of your idea
 
 ```{r}
-knitr::include_graphics("data_visualization_draft.jpg")
+knitr::include_graphics("data_visualization.jpeg") # showing image
 ```
 
-## d.
+## c. Make a draft of your visualization
 
-[The content of my piece shows my steps for each school day (for just two weeks), along with icons for my categorical data attached to each point. I have my screen time on the inverse of the axis to compare, and I also drew icons that compared my steps on long and short days and days where I had extracurricular or not. I was inspired by the icons created from Georgia and Stephanie's letter exchange. The form of the work using pencil to sketch out the diagram, with highlighters to fill in the color for the icons. The process of my work started with sketching the axis lines with pencil and spacing the tick marks evenly. I then added each point in while adding the necessary icons for each day.]
+```{r}
+knitr::include_graphics("data_visualization_draft.jpg") # showing image
+```
+
+## d. Write an artist statement
+
+[The content of my piece shows my steps for each school day (would expand this is just a draft), along with icons for my categorical data attached to each point. I have my screen time on the inverse of the axis to compare, and I also drew icons that compared my steps on long and short days and days where I had extracurricular or not (as well as office hours and food bank). I was inspired by the icons created from Georgia and Stephanie's letter exchange. The form of the work using pencil to sketch out the diagram, with highlighters and pens to fill in the color for the icons. The process of my work started with sketching the axis lines with pencil and spacing the tick marks evenly. I then added each point in while adding the necessary icons for each day.]
 
 # 3. Statistical Critique
 
-## a. 
+## a. Revisit and summarize
 
 [The authors use ANOVA and a Mann-Whitney U test. The main research question is whether differential habitat use provided significant separation between the two panda species.]
 
 ```{r}
-knitr::include_graphics("data_image.jpg")
+knitr::include_graphics("data_image.jpg") #showing image
 ```
 
-## b.
+## b. Visual clarity
 
-[The table does a great job to show ANOVA (tells us how much the means of the two groups differ relative to the variation within the group) for the habitat variables, by showing which habitat variables have a statistical difference between the two species (via F-statistic and p-value). It also lists out the Mann-Whitney U-statistic (ranks data and compares distributions between the two groups) and p-value, which indicates which habitat variables have a significant difference between two species.]
+[The table does a great job to show ANOVA (tells us how much the means of the two groups differ relative to the variation within the group) for the habitat variables, by showing which habitat variables have a statistical difference between the two species (via F-statistic and p-value). It also lists out the Mann-Whitney U-statistic (compares whether two independent samples comes from the same distribution) and p-value, which indicates which habitat variables have a significant difference between two species. The table also shows each habitat variable in a well spaced out format.]
 
-## c. 
+## c. Aesthetic clarity
 
 [For this table, the authors use italics for the F statistic for ANOVA and U statistic for Mann-U Whitney as well as for the p-values. By doing italics, it draws the readers' attention to these values.]
 
-## d.
+## d. Recommendations
 
 [A suggestion that I would have is for the authors is to break the table up to ANOVA and Mann-Whitney U-Test. I would suggest this because there's a lot of data in this current table, which would make it hard to look at. Another suggestion I would have is to organize the habitat variables that are significantly different between the two panda species and the ones that are not when you have broken up ANOVA and Mann-Whitney U-Test. The authors can list the habitat variables that were significantly different first, then list the rest of the habitat variables that were not significantly different. This just helps make the data less intimidating and make the data look more organized. The final table would break up into 2 tables, with ANOVA in one and Mann-Whitney U Test in another. The habitat variables with a significant difference between the two species would be listed first, then followed by the habitat variables with no significant difference between the two species would be listed second.]
