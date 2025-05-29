@@ -4,3 +4,4 @@ This repository is for homework 3. This is my repository, and I contribute to th
 # Data and file information
 I have graphs, photos, and excel spreadsheets in my files. I have a quarto doc for all my code. The code in this file creates boxplots, scatterplots, and tables for my data. I also have code for loading my images in.
 # Rendered Output
+https://henji15.github.io/ENVS-193DS_homework-03/code/ENVS-193DS_HW3.html
